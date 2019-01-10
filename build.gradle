@@ -24,8 +24,8 @@ deploy {
 }
 repositories {
 	mavenCentral()
-	maven {url "https://github.com/OhmSuite/ohm/tree/release"}
-	maven {url 'https://jitpack.io'}
+    url "https://plugins.gradle.org/m2/"
+    maven {url 'https://jitpack.io'}
 
 }
 
@@ -36,6 +36,7 @@ dependencies {
     compile ctre()
     compile navx()
     compile openrio.powerup.matchData()
+    classpath "edu.wpi.first:GradleRIO:2019.1.1"
    	compile files('native')
 	compile files('../Ohm/build/libs/ohm-0.1.0.jar')
 }
@@ -45,9 +46,10 @@ dependencies {
 // knows where to look for our Robot Class.
 jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    manifest jaci.openrio.gradle.GradleRIOPlugin.javaManifest(ROBOT_CLASS)
+    manifest jaci.openrio.gradle.GradleR/IOPlugin.javaManifest(ROBOT_CLASS)
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.4'
+    gradleVersion = '5.0'
 }
+apply plugin: "edu.wpi.first.GradleRIO"
